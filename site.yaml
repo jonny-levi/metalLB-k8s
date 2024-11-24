@@ -1,0 +1,9 @@
+---
+- hosts:
+    - k8s_masters
+  gather_facts: true
+  pre_tasks:
+    - name: variables
+      ansible.builtin.include_vars: vars/all.yml
+    - name: System preperations
+      ansible.builtin.include_tasks: tasks/system-prepare.yaml

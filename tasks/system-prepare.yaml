@@ -1,0 +1,25 @@
+- name: K8S - create metallb-system namespace
+  ansible.builtin.shell: kubectl create namespace metallb-system
+
+- name: Helm - add MetalLB to helm
+  kubernetes.core.helm_repository:
+    name: metallb
+    repo_url: https://metallb.github.io/metallb
+    force_update: true
+
+- name: Install MetalLB using helm
+  ansible.builtin.shell: helm install --namespace=metallb-system metallb metallb/metallb
+
+- name: Copy the metalLB files direcotry to tmp folder
+  ansible.builtin.copy:
+    src: ~/metalLB-k8s/metalLB-yamls/
+    dest: /tmp/metalLB-yamls/
+    owner: jonathan
+    group: jonathan
+    mode: '0755'
+
+- name: creating first pool 
+  ansible.builtin.shell: kubectl apply -f /tmp/metalLB-yamls/ip-address-pool.yml
+
+- name: creating L2-advertisment
+  ansible.builtin.shell: kubectl apply -f /tmp/metalLB-yamls/L2-advertisment.yml
