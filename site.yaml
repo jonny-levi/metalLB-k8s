@@ -7,3 +7,4 @@
       ansible.builtin.include_vars: vars/all.yml
     - name: System preperations
       ansible.builtin.include_tasks: tasks/system-prepare.yaml
+  become_user: jonathan 

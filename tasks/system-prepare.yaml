@@ -12,7 +12,7 @@
 
 - name: Copy the metalLB files direcotry to tmp folder
   ansible.builtin.copy:
-    src: ~/metalLB-k8s/metalLB-yamls/
+    src: ~/Documents/Projects/metalLB-k8s/metalLB-yamls/
     dest: /tmp/metalLB-yamls/
     owner: jonathan
     group: jonathan
